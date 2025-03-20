@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Goose Protocol Error</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .container {
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    h1 {
+      color: #d9534f;
+    }
+    .steps {
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      border-left: 4px solid #5bc0de;
+    }
+    .browser-specific {
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+    }
+    .browser-tab {
+      cursor: pointer;
+      padding: 10px 15px;
+      display: inline-block;
+      background-color: #eee;
+      border-radius: 5px 5px 0 0;
+      margin-right: 5px;
+    }
+    .browser-tab.active {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-bottom: none;
+    }
+    .browser-content {
+      display: none;
+      padding: 15px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+    }
+    .browser-content.active {
+      display: block;
+    }
+    code {
+      background-color: #f8f9fa;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Goose App Not Found</h1>
+    <p>It looks like the Goose application is not installed or not properly configured on your system.</p>
+    
+    <div class="steps">
+      <h2>To fix this issue:</h2>
+      <ol>
+        <li>Make sure the Goose application is installed on your computer.</li>
+        <li>If already installed, the application may need to be registered to handle <code>goose://</code> protocol links.</li>
+        <li>Try restarting your browser after installing or updating Goose.</li>
+      </ol>
+    </div>
+    
+    <div class="browser-specific">
+      <h2>Browser-Specific Instructions</h2>
+      
+      <div class="browser-tabs">
+        <div class="browser-tab active" data-browser="chrome">Chrome</div>
+        <div class="browser-tab" data-browser="brave">Brave</div>
+        <div class="browser-tab" data-browser="edge">Edge</div>
+        <div class="browser-tab" data-browser="firefox">Firefox</div>
+        <div class="browser-tab" data-browser="safari">Safari</div>
+      </div>
+      
+      <div class="browser-content active" id="chrome-content">
+        <h3>Chrome Protocol Handler Setup</h3>
+        <ol>
+          <li>Type <code>chrome://settings/handlers</code> in your address bar</li>
+          <li>Make sure "Allow sites to ask to become default handlers for protocols" is enabled</li>
+          <li>If Goose is listed under "Site can ask to handle protocols", make sure it's allowed</li>
+          <li>Restart Chrome and try again</li>
+        </ol>
+      </div>
+      
+      <div class="browser-content" id="brave-content">
+        <h3>Brave Protocol Handler Setup</h3>
+        <ol>
+          <li>Type <code>brave://settings/handlers</code> in your address bar</li>
+          <li>Make sure "Sites can ask to handle protocols" is enabled</li>
+          <li>If Goose is listed under "Site can ask to handle protocols", make sure it's allowed</li>
+          <li>Restart Brave and try again</li>
+        </ol>
+      </div>
+      
+      <div class="browser-content" id="edge-content">
+        <h3>Edge Protocol Handler Setup</h3>
+        <ol>
+          <li>Type <code>edge://settings/content/protocolActivation</code> in your address bar</li>
+          <li>Make sure protocol activation is properly configured</li>
+          <li>Restart Edge and try again</li>
+        </ol>
+      </div>
+      
+      <div class="browser-content" id="firefox-content">
+        <h3>Firefox Protocol Handler Setup</h3>
+        <ol>
+          <li>When you first click a <code>goose://</code> link, Firefox should ask how to handle it</li>
+          <li>If you previously declined, go to Firefox Settings > Applications</li>
+          <li>Find "goose" in the list and set it to use the Goose application</li>
+          <li>If it's not listed, you may need to reinstall the Goose application</li>
+        </ol>
+      </div>
+      
+      <div class="browser-content" id="safari-content">
+        <h3>Safari Protocol Handler Setup</h3>
+        <ol>
+          <li>Safari should ask how to handle the <code>goose://</code> protocol when first encountered</li>
+          <li>If you previously declined, you may need to reset Safari's protocol handler settings</li>
+          <li>Alternatively, reinstall the Goose application</li>
+        </ol>
+      </div>
+    </div>
+    
+    <p style="margin-top: 30px;">
+      <a href="https://gooseai.app/download" target="_blank">Download Goose</a> | 
+      <a href="https://gooseai.app/support" target="_blank">Get Support</a>
+    </p>
+  </div>
+
+  <script>
+    // Simple tab switching functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.browser-tab');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Remove active class from all tabs
+          tabs.forEach(t => t.classList.remove('active'));
+          
+          // Add active class to clicked tab
+          this.classList.add('active');
+          
+          // Hide all content panels
+          const contents = document.querySelectorAll('.browser-content');
+          contents.forEach(content => content.classList.remove('active'));
+          
+          // Show the selected content panel
+          const browser = this.getAttribute('data-browser');
+          document.getElementById(browser + '-content').classList.add('active');
+        });
+      });
+      
+      // Try to detect browser and show appropriate tab
+      const userAgent = navigator.userAgent.toLowerCase();
+      let detectedBrowser = 'chrome'; // Default
+      
+      if (userAgent.includes('firefox')) {
+        detectedBrowser = 'firefox';
+      } else if (userAgent.includes('edg')) {
+        detectedBrowser = 'edge';
+      } else if (userAgent.includes('safari') && !userAgent.includes('chrome')) {
+        detectedBrowser = 'safari';
+      } else if (userAgent.includes('brave')) {
+        detectedBrowser = 'brave';
+      }
+      
+      // Simulate click on the detected browser tab
+      const detectedTab = document.querySelector(`.browser-tab[data-browser="${detectedBrowser}"]`);
+      if (detectedTab) {
+        detectedTab.click();
+      }
+    });
+  </script>
+</body>
+</html>
