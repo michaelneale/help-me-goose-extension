@@ -2,6 +2,9 @@
 
 A simple browser extension that sends web page content to the Goose app for assistance. Compatible with Chrome, Brave, Edge, Firefox, and other Chromium-based browsers.
 
+![image](https://github.com/user-attachments/assets/fcc8cc2b-cc69-4636-8842-dd732affffe7)
+
+
 ## Features
 
 - One-click "Help Me Goose" button to send page content to Goose
